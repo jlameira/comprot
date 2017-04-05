@@ -1,0 +1,50 @@
+<html>
+{{template "header.tmpl.html"}}
+
+<body>
+  {{template "nav.tmpl.html"}}
+
+  <div class="jumbotron text-center">
+    <div class="container">
+      <h2>Lista de Processos</h2>
+
+    </div>
+  </div>
+  <div class="container">
+    <div class="bootstrap-table" >
+      <table id="tabelaProcessos" class="table table-hover">
+        <th>Data de Protocolo </th>
+        <th>Nome do Interessado</th>
+        <th>Ultima Movimentação</th>
+        <th>Penúltima Movimentação</th>
+         <th>Processo</th>
+         <tfoot>
+								<tr>
+									<td><a href="javascript:paginaAnterior();javascript:waitingDialog.show('Processando Requisição')" style="display: inline;">&lt;&lt; Anterior</a></td>
+									<td>
+										<div class="row">
+											<button id="btn-imprimir" class="btn btn-primary col-md-offset-2">Imprimir</button>
+											<button id="btn-retornar" class="btn btn-primary col-md-offset-1">Retornar</button>
+										</div>
+									</td>
+									<td><a href="javascript:proximaPagina();javascript:waitingDialog.show('Processando Requisição')">Próximo &gt;&gt;</a></td>
+								</tr>
+							</tfoot>
+      </table>
+    </div>
+  </div>
+
+<script>
+    var funcao = localStorage.getItem('funcao');
+    if(funcao && funcao !== '') {
+        var dados = localStorage.getItem('dados');
+        try {
+            window[funcao](dados);
+        } catch(e) {
+            console.log(e.stack);
+        }
+    }
+  </script>
+</body>
+
+</html>
